@@ -203,25 +203,6 @@ Use this script during your presentation or project defense. It is organized int
 > *"All checks performed during our demo are compiled in **Reports & History**, where they can be filtered, searched, and exported to CSV or JSON for compliance records.  
 > We also have a **Learn Security** section detailing the CIA Triad, Hashing vs Encryption, and Defense-in-Depth, as well as a full **Dark/Light Theme** switch."*
 
-### Part 5: Conclusion & Q&A Preparation (30 Seconds)
-> *"In conclusion, CyberGuard Security Kit demonstrates that effective, educational cybersecurity tools can be engineered with simple, standard web technologies without external bloat or cloud dependencies.  
-> Thank you, and I look forward to your questions."*
-
----
-
-### 💡 Frequently Asked Questions (Professors' Likely Questions)
-
-1. **Q: Why did you build this with Vanilla JavaScript instead of React or Node.js?**  
-   *A:* "To maintain maximum accessibility, educational clarity, and zero attack surface. By eliminating dependencies and npm packages, this application has no external vulnerabilities, requires zero installation, and can be inspected and run on any browser on any machine."
-
-2. **Q: How does your password crack time estimation work?**  
-   *A:* "It calculates Shannon information entropy $E = L \times \log_2(N)$ based on character pool size and length, minus penalties for dictionary words. The crack time assumes an offline attacker using high-end GPU clusters capable of $10^{10}$ (10 billion) hash evaluations per second."
-
-3. **Q: Why can't the URL analyzer confirm 100% if a site is phishing?**  
-   *A:* "Because modern phishing attackers can purchase legitimate domain names and obtain valid SSL certificates. Heuristics identify deceptive patterns and anomalies, but confirmation requires live threat intelligence blocklists or dynamic sandbox detonation."
-
-4. **Q: How does the Web Crypto API differ from an external hashing library?**  
-   *A:* "Web Crypto API (`window.crypto.subtle`) is a native C++ implementation built directly into modern browser engines. It is RFC-compliant, hardware-accelerated, significantly faster than pure JavaScript hashing libraries, and introduces zero third-party supply-chain risks."
 
 ---
 
