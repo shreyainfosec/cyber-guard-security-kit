@@ -209,5 +209,5 @@ Use this script during your presentation or project defense. It is organized int
 ## 8. License & Attribution
 
 - **Project:** CyberGuard Security Kit  
-- **Author:** Shreya  
+- **Author:** Kumari Shreya  
 - **License:** MIT License — Open for academic and educational use.
