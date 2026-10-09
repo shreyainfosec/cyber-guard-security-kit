@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberGuard Security Kit | Enterprise SOC Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-dark">
+  <!-- Application Shell -->
+  <div class="app-layout">
+    
+    <!-- Left Navigation Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/>
+            <path d="M12 6v12M8 10l4-4 4 4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="brand-text">
+            <span class="brand-title">CyberGuard</span>
+            <span class="brand-subtitle">Security Kit</span>
+          </div>
+        </div>
+        <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Close navigation sidebar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Environment & Status Indicator -->
+      <div class="sidebar-status-pill">
+        <span class="status-dot"></span>
+        <span class="status-label">Client-Side SOC Sandbox</span>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="sidebar-nav">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <button class="nav-link active" data-target="dashboard">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="9" rx="1"/>
+                <rect x="14" y="3" width="7" height="5" rx="1"/>
+                <rect x="14" y="12" width="7" height="9" rx="1"/>
+                <rect x="3" y="16" width="7" height="5" rx="1"/>
+              </svg>
+              <span>Dashboard</span>
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" data-target="password-checker">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                <circle cx="12" cy="16" r="1"/>
+              </svg>
+              <span>Password Checker</span>
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" data-target="url-analyzer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              <span>URL Analyzer</span>
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" data-target="file-integrity">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <polyline points="9 15 12 18 15 15"/>
+                <line x1="12" y1="12" x2="12" y2="18"/>
+              </svg>
+              <span>File Integrity</span>
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" data-target="log-analyzer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="4" y1="6" x2="20" y2="6"/>
+                <line x1="4" y1="12" x2="14" y2="12"/>
+                <line x1="4" y1="18" x2="18" y2="18"/>
+                <circle cx="18" cy="12" r="2"/>
+              </svg>
+              <span>Log Analyzer</span>
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" data-target="reports">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <path d="M16 13H8"/>
+                <path d="M16 17H8"/>
+                <path d="M10 9H8"/>
+              </svg>
+              <span>Reports &amp; History</span>
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" data-target="learn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+              <span>Learn Security</span>
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" data-target="settings">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+              <span>Settings</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <div class="version-tag">
+          <span class="tag-label">Toolkit Version</span>
+          <span class="tag-val">v1.0.0 (Offline)</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      
+      <!-- Top Application Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="menu-toggle-btn" id="menu-toggle-btn" aria-label="Toggle navigation menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="breadcrumbs">
+            <span class="breadcrumb-root">CyberGuard</span>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current" id="header-page-title">Dashboard</span>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="privacy-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>Zero Data Transmitted &bull; 100% Client-Side</span>
+          </div>
+          
+          <!-- Theme Switcher Button -->
+          <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Dark or Light theme">
+            <span class="theme-icon dark-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+            </span>
+            <span class="theme-icon light-icon" style="display: none;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Scrollable Body -->
+      <main class="content-container">
+
+        <!-- ============================================== -->
+        <!-- VIEW 1: DASHBOARD                              -->
+        <!-- ============================================== -->
+        <section class="view-section active" id="view-dashboard">
+          
+          <!-- Notice Banner -->
+          <div class="banner-notice">
+            <div class="notice-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+            </div>
+            <div class="notice-content">
+              <strong>Local Security Toolkit Notice:</strong>
+              <span>This software performs local heuristic inspection directly in your browser. It is not an active enterprise network monitor or live cloud scanner. No credentials, tokens, or file bytes leave this device.</span>
+            </div>
+          </div>
+
+          <!-- Welcome Hero Section -->
+          <div class="dashboard-hero">
+            <div class="hero-text">
+              <h1 class="hero-title">Security Operations Center Dashboard</h1>
+              <p class="hero-description">
+                Interactive security analysis kit designed for educational evaluation of credentials, web URLs, cryptographic file hashes, and server authentication logs.
+              </p>
+            </div>
+            <div class="hero-action">
+              <button class="btn btn-secondary" id="btn-quick-tour" onclick="CyberGuard.switchTab('learn')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                Learn Security Concepts
+              </button>
+            </div>
+          </div>
+
+          <!-- Metric Cards Row -->
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Checks Performed</span>
+                <span class="metric-icon teal-bg">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                  </svg>
+                </span>
+              </div>
+              <div class="metric-value" id="metric-total-checks">0</div>
+              <div class="metric-footer">
+                <span class="metric-subtext">Session &amp; local stored runs</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Tools Available</span>
+                <span class="metric-icon blue-bg">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                  </svg>
+                </span>
+              </div>
+              <div class="metric-value">4</div>
+              <div class="metric-footer">
+                <span class="metric-subtext">Password, URL, Hash, Logs</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Findings Identified</span>
+                <span class="metric-icon amber-bg">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                  </svg>
+                </span>
+              </div>
+              <div class="metric-value" id="metric-total-findings">0</div>
+              <div class="metric-footer">
+                <span class="metric-subtext">Weaknesses &amp; alerts triggered</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Completed Analyses</span>
+                <span class="metric-icon green-bg">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                  </svg>
+                </span>
+              </div>
+              <div class="metric-value" id="metric-completed-analyses">0</div>
+              <div class="metric-footer">
+                <span class="metric-subtext">Finished security audits</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Access Cards -->
+          <div class="section-heading-group">
+            <h2 class="section-title">Functional Security Toolset</h2>
+            <p class="section-subtitle">Select a tool module below to begin analysis</p>
+          </div>
+
+          <div class="tools-grid">
+            <div class="tool-card" onclick="CyberGuard.switchTab('password-checker')">
+              <div class="tool-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <div class="tool-card-body">
+                <h3 class="tool-card-title">Password Checker</h3>
+                <p class="tool-card-desc">Evaluate entropy, character variety, common dictionary patterns, and calculate realistic brute-force resistance.</p>
+                <div class="tool-card-action">
+                  <span>Launch Module &rarr;</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-card" onclick="CyberGuard.switchTab('url-analyzer')">
+              <div class="tool-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <div class="tool-card-body">
+                <h3 class="tool-card-title">URL Analyzer</h3>
+                <p class="tool-card-desc">Inspect domain structures, IP hosts, deceptive subdomains, embedded credentials, and protocol risks without opening links.</p>
+                <div class="tool-card-action">
+                  <span>Launch Module &rarr;</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-card" onclick="CyberGuard.switchTab('file-integrity')">
+              <div class="tool-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <polyline points="9 15 12 18 15 15"/>
+                </svg>
+              </div>
+              <div class="tool-card-body">
+                <h3 class="tool-card-title">File Integrity</h3>
+                <p class="tool-card-desc">Compute cryptographic SHA-256 fingerprints client-side using browser Web Crypto to detect tampering or corruption.</p>
+                <div class="tool-card-action">
+                  <span>Launch Module &rarr;</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-card" onclick="CyberGuard.switchTab('log-analyzer')">
+              <div class="tool-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="4" y1="6" x2="20" y2="6"/>
+                  <line x1="4" y1="12" x2="14" y2="12"/>
+                  <line x1="4" y1="18" x2="18" y2="18"/>
+                  <circle cx="18" cy="12" r="2"/>
+                </svg>
+              </div>
+              <div class="tool-card-body">
+                <h3 class="tool-card-title">Log Analyzer</h3>
+                <p class="tool-card-desc">Scan authentication logs for repeated failed logins, dictionary attempts, brute-force patterns, and isolate offending IPs.</p>
+                <div class="tool-card-action">
+                  <span>Launch Module &rarr;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Grid: Findings Summary + Recent Activity -->
+          <div class="dashboard-split-grid">
+            
+            <!-- Security Findings Summary -->
+            <div class="panel">
+              <div class="panel-header">
+                <div class="panel-title-wrap">
+                  <h3 class="panel-title">Findings Summary by Category</h3>
+                  <span class="panel-subtitle">Distribution of security alerts detected</span>
+                </div>
+              </div>
+              <div class="panel-body">
+                <div class="category-breakdown">
+                  <div class="category-item">
+                    <div class="category-info">
+                      <span class="category-name">Password Weaknesses</span>
+                      <span class="category-count" id="cat-count-password">0 alerts</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                      <div class="progress-bar-fill fill-teal" id="cat-bar-password" style="width: 0%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="category-item">
+                    <div class="category-info">
+                      <span class="category-name">URL Phishing &amp; Heuristics</span>
+                      <span class="category-count" id="cat-count-url">0 alerts</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                      <div class="progress-bar-fill fill-amber" id="cat-bar-url" style="width: 0%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="category-item">
+                    <div class="category-info">
+                      <span class="category-name">File Integrity Comparisons</span>
+                      <span class="category-count" id="cat-count-file">0 verifications</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                      <div class="progress-bar-fill fill-blue" id="cat-bar-file" style="width: 0%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="category-item">
+                    <div class="category-info">
+                      <span class="category-name">Authentication Log Anomalies</span>
+                      <span class="category-count" id="cat-count-log">0 incidents</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                      <div class="progress-bar-fill fill-red" id="cat-bar-log" style="width: 0%;"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="demonstration-notice">
+                  <span class="badge badge-demo">Note</span>
+                  <span>Metrics update automatically when you analyze items in the tools. No sample mock data is falsified.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Activity Table Preview -->
+            <div class="panel">
+              <div class="panel-header">
+                <div class="panel-title-wrap">
+                  <h3 class="panel-title">Recent Inspection Log</h3>
+                  <span class="panel-subtitle">Audited actions in this browser session</span>
+                </div>
+                <button class="btn btn-sm btn-ghost" onclick="CyberGuard.switchTab('reports')">View All &rarr;</button>
+              </div>
+              <div class="panel-body p-0">
+                <div class="table-responsive">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Time</th>
+                        <th>Module</th>
+                        <th>Status / Result</th>
+                        <th>Summary</th>
+                      </tr>
+                    </thead>
+                    <tbody id="dashboard-recent-table">
+                      <tr>
+                        <td colspan="4" class="text-center text-muted py-4">No recent inspections recorded. Try running any tool!</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW 2: PASSWORD CHECKER                       -->
+        <!-- ============================================== -->
+        <section class="view-section" id="view-password-checker">
+          <div class="tool-header-block">
+            <div class="tool-title-group">
+              <h1 class="tool-main-title">Password Strength &amp; Entropy Checker</h1>
+              <p class="tool-subtitle">
+                Inspect password complexity, estimate brute-force cracking resistance, and identify vulnerable patterns according to modern NIST guidelines.
+              </p>
+            </div>
+            <div class="privacy-callout">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <span><strong>Privacy Policy:</strong> Passwords are evaluated purely in memory. They are never saved, logged, or sent across the network.</span>
+            </div>
+          </div>
+
+          <div class="grid-2-col">
+            <!-- Left: Interactive Form & Meter -->
+            <div class="panel">
+              <div class="panel-header">
+                <h3 class="panel-title">Password Evaluation Input</h3>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="password-input" class="form-label">Enter Password to Evaluate:</label>
+                  <div class="input-with-button">
+                    <div class="password-input-wrap flex-grow-1">
+                      <input type="password" id="password-input" class="form-control" placeholder="Type or paste a test password..." autocomplete="off" spellcheck="false">
+                      <button type="button" class="btn-icon" id="password-toggle-btn" title="Show or hide password" aria-label="Toggle password visibility">
+                        <svg id="eye-icon-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                          <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <svg id="eye-icon-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+                          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                          <line x1="1" y1="1" x2="23" y2="23"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="btn-audit-password">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                      </svg>
+                      Log Audit Check
+                    </button>
+                  </div>
+                  <small class="form-hint">Tip: Live analysis runs as you type. Click 'Log Audit Check' or press Enter to record findings in session history (actual password string is strictly never stored).</small>
+                </div>
+
+                <!-- Quick Presets for Easy Student Presentation -->
+                <div class="quick-presets">
+                  <span class="preset-label">Test Samples:</span>
+                  <button class="preset-btn" onclick="CyberGuard.testPassword('123456')">Weak (123456)</button>
+                  <button class="preset-btn" onclick="CyberGuard.testPassword('P@ssw0rd2024')">Common Dictionary</button>
+                  <button class="preset-btn" onclick="CyberGuard.testPassword('CyberShield-789#')">Good Mix</button>
+                  <button class="preset-btn" onclick="CyberGuard.testPassword('correct-horse-battery-staple-2026!')">Strong Passphrase</button>
+                </div>
+
+                <!-- Visual Strength Meter -->
+                <div class="strength-meter-section">
+                  <div class="meter-info">
+                    <span class="meter-label">Estimated Strength:</span>
+                    <span class="strength-status-text" id="strength-status-text">Awaiting Input</span>
+                  </div>
+                  <div class="strength-bar-track">
+                    <div class="strength-bar-fill" id="strength-bar-fill"></div>
+                  </div>
+                </div>
+
+                <!-- Metrics Overview (Entropy, Crack Time) -->
+                <div class="stats-mini-grid">
+                  <div class="mini-stat-card">
+                    <span class="mini-stat-label">Calculated Entropy</span>
+                    <span class="mini-stat-val" id="entropy-value">0 bits</span>
+                  </div>
+                  <div class="mini-stat-card">
+                    <span class="mini-stat-label">Est. Brute-Force Time</span>
+                    <span class="mini-stat-val" id="crack-time-value">Instant</span>
+                  </div>
+                  <div class="mini-stat-card">
+                    <span class="mini-stat-label">Character Length</span>
+                    <span class="mini-stat-val" id="pwd-length-value">0</span>
+                  </div>
+                </div>
+
+                <!-- Real-time Checklist -->
+                <div class="checklist-group">
+                  <h4 class="checklist-title">Complexity Criteria Breakdown:</h4>
+                  <ul class="criteria-list">
+                    <li id="rule-length" class="criteria-item uncheck">
+                      <span class="criteria-bullet"></span>
+                      <span>Length is at least 12 characters (16+ recommended)</span>
+                    </li>
+                    <li id="rule-upper" class="criteria-item uncheck">
+                      <span class="criteria-bullet"></span>
+                      <span>Contains uppercase letters (A-Z)</span>
+                    </li>
+                    <li id="rule-lower" class="criteria-item uncheck">
+                      <span class="criteria-bullet"></span>
+                      <span>Contains lowercase letters (a-z)</span>
+                    </li>
+                    <li id="rule-number" class="criteria-item uncheck">
+                      <span class="criteria-bullet"></span>
+                      <span>Contains numerical digits (0-9)</span>
+                    </li>
+                    <li id="rule-symbol" class="criteria-item uncheck">
+                      <span class="criteria-bullet"></span>
+                      <span>Contains special symbols (e.g., !@#$%^&amp;*)</span>
+                    </li>
+                    <li id="rule-dictionary" class="criteria-item uncheck">
+                      <span class="criteria-bullet"></span>
+                      <span>Free of common predictable words and sequence patterns</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Actionable Security Analysis & Education -->
+            <div class="panel">
+              <div class="panel-header">
+                <h3 class="panel-title">Analysis &amp; Hardening Recommendations</h3>
+              </div>
+              <div class="panel-body">
+                <div id="password-feedback-container">
+                  <div class="empty-state">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    <h4>No Password Entered</h4>
+                    <p>Enter any phrase on the left to review specific vulnerability indicators, entropy analysis, and improvement advice.</p>
+                  </div>
+                </div>
+
+                <!-- Academic/Presentation Explanation Box -->
+                <div class="educational-box mt-4">
+                  <h4 class="edu-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="12" y1="16" x2="12" y2="12"/>
+                      <line x1="12" y1="8" x2="12.01" y2="8"/>
+                    </svg>
+                    College Presentation Note: Entropy &amp; Passphrases
+                  </h4>
+                  <p class="edu-text">
+                    Modern offensive security utilizes GPU clusters capable of billions of guesses per second. Standard 8-character passwords with simple substitutions (like <code>P@ssw0rd</code>) fall within minutes. Long multi-word passphrases (e.g. <code>ocean-battery-purple-anchor</code>) produce high entropy ($R^L$) while remaining human-memorable.
+                  </p>
+                  <p class="edu-disclaimer">
+                    <strong>Important disclaimer:</strong> No password check can guarantee a credential is immune to phishing, social engineering, credential stuffing, or keyloggers.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW 3: URL ANALYZER                           -->
+        <!-- ============================================== -->
+        <section class="view-section" id="view-url-analyzer">
+          <div class="tool-header-block">
+            <div class="tool-title-group">
+              <h1 class="tool-main-title">Suspicious URL &amp; Phishing Heuristic Analyzer</h1>
+              <p class="tool-subtitle">
+                Deconstruct web addresses safely without sending requests or navigating to potential malware/phishing servers.
+              </p>
+            </div>
+            <div class="privacy-callout">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span><strong>Safety Guarantee:</strong> This tool parses the text string locally. It will never visit, ping, or execute remote content.</span>
+            </div>
+          </div>
+
+          <div class="panel mb-4">
+            <div class="panel-header">
+              <h3 class="panel-title">URL Inspection Input</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <label for="url-input" class="form-label">Target Web Address (URL):</label>
+                <div class="input-with-button">
+                  <input type="text" id="url-input" class="form-control" placeholder="e.g. https://account.paypal.com.verify-login.xyz/login?session=123" spellcheck="false">
+                  <button class="btn btn-primary" id="btn-analyze-url">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="11" cy="11" r="8"/>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    Analyze URL
+                  </button>
+                </div>
+              </div>
+
+              <!-- Quick Demo Samples for Presentation -->
+              <div class="quick-presets">
+                <span class="preset-label">Test Samples:</span>
+                <button class="preset-btn" onclick="CyberGuard.testUrl('https://www.google.com/search?q=cybersecurity')">Standard Safe HTTPS</button>
+                <button class="preset-btn" onclick="CyberGuard.testUrl('http://192.168.1.105:8080/admin/login')">IP Host + HTTP + Port</button>
+                <button class="preset-btn" onclick="CyberGuard.testUrl('http://paypal.com.account-update.info.free-bonus.top/secure?user=victim')">Deceptive Brand Subdomain</button>
+                <button class="preset-btn" onclick="CyberGuard.testUrl('https://bank-login:fake@attacker-site.com/auth')">Embedded Credential (@)</button>
+                <button class="preset-btn" onclick="CyberGuard.testUrl('https://apple-login-security.com.verify-identity.xyz/update')">Hyphen &amp; Subdomain Flood</button>
+              </div>
+
+              <!-- Inline Feedback & Validation Error Banner -->
+              <div id="url-error-alert" class="banner-notice mt-3" style="display: none; background-color: var(--status-red-soft); border-color: rgba(244, 63, 94, 0.4);">
+                <div class="notice-icon" style="color: var(--status-red);">&#9888;</div>
+                <div class="notice-content">
+                  <strong style="color: var(--status-red);">Invalid Input:</strong>
+                  <span id="url-error-msg">Please enter a target URL to analyze.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- URL Analysis Output -->
+          <div id="url-result-container" style="display: none;">
+            
+            <!-- Summary Banner -->
+            <div class="url-summary-card" id="url-summary-card">
+              <div class="summary-left">
+                <span class="url-risk-badge" id="url-risk-badge">Low Risk</span>
+                <div class="url-verdict-text">
+                  <h3 id="url-verdict-title">URL Format Passed Primary Checks</h3>
+                  <p id="url-verdict-desc">No severe automated phishing patterns detected.</p>
+                </div>
+              </div>
+              <div class="summary-metrics">
+                <div class="summary-metric-item">
+                  <span class="s-label">Warnings</span>
+                  <span class="s-val text-amber" id="url-warning-count">0</span>
+                </div>
+                <div class="summary-metric-item">
+                  <span class="s-label">Critical Alerts</span>
+                  <span class="s-val text-red" id="url-alert-count">0</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- URL Structural Anatomy Component -->
+            <div class="panel mb-4">
+              <div class="panel-header">
+                <h3 class="panel-title">URL Structural Anatomy Breakdown</h3>
+                <span class="panel-subtitle">How a browser interprets this address</span>
+              </div>
+              <div class="panel-body">
+                <div class="url-breakdown-tags" id="url-breakdown-tags">
+                  <!-- Populated by JS -->
+                </div>
+                <div class="url-parts-grid">
+                  <div class="part-item">
+                    <span class="part-label">Protocol / Scheme</span>
+                    <span class="part-value" id="url-part-protocol">-</span>
+                  </div>
+                  <div class="part-item">
+                    <span class="part-label">Registered Domain / Host</span>
+                    <span class="part-value" id="url-part-host">-</span>
+                  </div>
+                  <div class="part-item">
+                    <span class="part-label">Subdomains</span>
+                    <span class="part-value" id="url-part-subdomain">-</span>
+                  </div>
+                  <div class="part-item">
+                    <span class="part-label">Top-Level Domain (TLD)</span>
+                    <span class="part-value" id="url-part-tld">-</span>
+                  </div>
+                  <div class="part-item">
+                    <span class="part-label">Path</span>
+                    <span class="part-value" id="url-part-path">-</span>
+                  </div>
+                  <div class="part-item">
+                    <span class="part-label">Port Specified</span>
+                    <span class="part-value" id="url-part-port">Default</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detailed Heuristic Findings Table -->
+            <div class="panel mb-4">
+              <div class="panel-header">
+                <h3 class="panel-title">Heuristic Rules Evaluation</h3>
+                <span class="panel-subtitle">Results across 9 enterprise phishing detection patterns</span>
+              </div>
+              <div class="panel-body p-0">
+                <div class="table-responsive">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th style="width: 140px;">Heuristic Check</th>
+                        <th style="width: 110px;">Status</th>
+                        <th>Technical Rationale</th>
+                        <th>Recommended Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="url-heuristics-table">
+                      <!-- Populated by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Educational Warning Banner -->
+            <div class="banner-notice">
+              <div class="notice-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                  <line x1="12" y1="9" x2="12" y2="13"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+              </div>
+              <div class="notice-content">
+                <strong>Crucial Security Limitation:</strong>
+                <span>Heuristic pattern analysis cannot guarantee whether a server is genuinely benign or malicious. Legitimate servers can be compromised, and zero-day phishing sites frequently use valid HTTPS certificates and normal domains. Always verify authenticity via independent channels.</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Empty State (When no URL analyzed yet) -->
+          <div id="url-empty-state" class="panel">
+            <div class="panel-body text-center py-5">
+              <div class="empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+                <h4>Ready for URL Inspection</h4>
+                <p>Type any web link above or click one of the test samples to analyze its domain hierarchy and security indicators.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW 4: FILE INTEGRITY                         -->
+        <!-- ============================================== -->
+        <section class="view-section" id="view-file-integrity">
+          <div class="tool-header-block">
+            <div class="tool-title-group">
+              <h1 class="tool-main-title">Cryptographic File Integrity (SHA-256)</h1>
+              <p class="tool-subtitle">
+                Generate cryptographic checksums locally to verify file authenticity and detect unauthorized tampering or corruption.
+              </p>
+            </div>
+            <div class="privacy-callout">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span><strong>Local Browser Processing:</strong> The browser's native Web Crypto API processes file streams entirely in client RAM. No bytes are uploaded.</span>
+            </div>
+          </div>
+
+          <div class="grid-2-col">
+            <!-- Left: File Selector & Hash Results -->
+            <div class="panel">
+              <div class="panel-header">
+                <h3 class="panel-title">File Selection &amp; Checksum Generator</h3>
+              </div>
+              <div class="panel-body">
+                <!-- Drop Zone -->
+                <div class="drop-zone" id="file-drop-zone">
+                  <input type="file" id="file-input" class="file-input-hidden" aria-label="Select file for hash calculation">
+                  <div class="drop-zone-content">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="17 8 12 3 7 8"/>
+                      <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    <p class="drop-zone-title">Click to browse or drag &amp; drop a file here</p>
+                    <span class="drop-zone-subtitle">Any file format supported (PDF, EXE, ZIP, TXT, IMG, etc.)</span>
+                  </div>
+                </div>
+
+                <!-- Test Sample Button -->
+                <div class="quick-presets mt-3">
+                  <span class="preset-label">Demo Quick Test:</span>
+                  <button class="preset-btn" id="btn-hash-demo-file">Create &amp; Hash Virtual Text File</button>
+                </div>
+
+                <!-- File Metadata Card (When loaded) -->
+                <div id="file-meta-card" class="file-meta-card" style="display: none;">
+                  <div class="meta-row">
+                    <span class="meta-label">File Name:</span>
+                    <span class="meta-value font-mono" id="file-name-display">-</span>
+                  </div>
+                  <div class="meta-row">
+                    <span class="meta-label">File Size:</span>
+                    <span class="meta-value" id="file-size-display">-</span>
+                  </div>
+                  <div class="meta-row">
+                    <span class="meta-label">MIME Type:</span>
+                    <span class="meta-value" id="file-type-display">-</span>
+                  </div>
+                  <div class="meta-row">
+                    <span class="meta-label">Last Modified:</span>
+                    <span class="meta-value" id="file-date-display">-</span>
+                  </div>
+                </div>
+
+                <!-- Generated Hash Box -->
+                <div class="hash-result-box mt-4">
+                  <div class="hash-box-header">
+                    <span class="hash-algo-badge">SHA-256 Fingerprint (256-bit)</span>
+                    <button class="btn btn-sm btn-ghost" id="btn-copy-hash" disabled>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                      </svg>
+                      <span id="copy-btn-text">Copy Hash</span>
+                    </button>
+                  </div>
+                  <div class="hash-output" id="hash-output-display">
+                    [Select a file above to calculate SHA-256 checksum]
+                  </div>
+                </div>
+
+                <!-- Expected Hash Verification Form -->
+                <div class="expected-hash-group mt-4">
+                  <label for="expected-hash-input" class="form-label">Verify Against Expected Checksum (Optional):</label>
+                  <input type="text" id="expected-hash-input" class="form-control font-mono" placeholder="Paste expected SHA-256 from vendor or documentation..." spellcheck="false">
+                  <div class="hash-compare-feedback mt-2" id="hash-compare-feedback" style="display: none;">
+                    <!-- Verification match or mismatch card -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Educational Knowledge Base on Integrity -->
+            <div class="panel">
+              <div class="panel-header">
+                <h3 class="panel-title">What is File Integrity &amp; Cryptographic Hashing?</h3>
+              </div>
+              <div class="panel-body">
+                <div class="edu-card">
+                  <div class="edu-card-icon teal-color">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                      <polyline points="2 17 12 22 22 17"/>
+                      <polyline points="2 12 12 17 22 12"/>
+                    </svg>
+                  </div>
+                  <div class="edu-card-text">
+                    <h4>The "Digital Fingerprint" Concept</h4>
+                    <p>A cryptographic hash function takes any arbitrary file stream and maps it to a unique, fixed-size string of 64 hexadecimal characters (256 bits). It is strictly one-way: you cannot reverse a hash back into the original file.</p>
+                  </div>
+                </div>
+
+                <div class="edu-card mt-3">
+                  <div class="edu-card-icon amber-color">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                  </div>
+                  <div class="edu-card-text">
+                    <h4>The Avalanche Effect</h4>
+                    <p>If even a single character, bit, or punctuation mark in a 10 GB file is altered, approximately 50% of the resulting hash bits will flip completely. This makes unauthorized tampering instantly detectable.</p>
+                  </div>
+                </div>
+
+                <div class="edu-card mt-3">
+                  <div class="edu-card-icon blue-color">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                      <line x1="16" y1="13" x2="8" y2="13"/>
+                      <line x1="16" y1="17" x2="8" y2="17"/>
+                      <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                  </div>
+                  <div class="edu-card-text">
+                    <h4>Real-World Industry Use Cases</h4>
+                    <ul class="clean-bullet-list">
+                      <li><strong>Software Downloads:</strong> Verifying operating system ISOs (e.g. Kali Linux, Ubuntu) against publisher hashes.</li>
+                      <li><strong>Digital Forensics:</strong> Proving digital evidence in court has remained pristine and unmodified.</li>
+                      <li><strong>Malware Defense:</strong> Security tools query known malicious file hashes (e.g., via VirusTotal).</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW 5: LOG ANALYZER                           -->
+        <!-- ============================================== -->
+        <section class="view-section" id="view-log-analyzer">
+          <div class="tool-header-block">
+            <div class="tool-title-group">
+              <h1 class="tool-main-title">Server Authentication Log Analyzer</h1>
+              <p class="tool-subtitle">
+                Detect brute-force attempts, unauthorized access patterns, and suspicious IP addresses from Linux auth/syslog files.
+              </p>
+            </div>
+            <div class="privacy-callout">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              <span><strong>Client-Side Engine:</strong> Reads log files line-by-line using standard JavaScript regex patterns. Completely offline.</span>
+            </div>
+          </div>
+
+          <!-- Log Controls Row -->
+          <div class="panel mb-4">
+            <div class="panel-header">
+              <h3 class="panel-title">Load Authentication Log Data</h3>
+            </div>
+            <div class="panel-body">
+              <div class="log-controls-wrapper">
+                <div class="file-pick-wrap">
+                  <label for="log-file-input" class="btn btn-outline">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="17 8 12 3 7 8"/>
+                      <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    Select Local .log / .txt File
+                  </label>
+                  <input type="file" id="log-file-input" accept=".log,.txt,text/plain" style="display: none;">
+                  <span id="log-file-name" class="ml-2 text-muted">No custom file chosen</span>
+                </div>
+
+                <div class="divider-text">OR</div>
+
+                <!-- Instant Demo Button for Presentation -->
+                <button class="btn btn-primary" id="btn-load-sample-log">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                  </svg>
+                  Load Sample Linux Auth Log (Demo)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Log Analysis Results -->
+          <div id="log-analysis-results" style="display: none;">
+            
+            <!-- Metrics Row -->
+            <div class="metrics-grid mb-4">
+              <div class="metric-card">
+                <div class="metric-header">
+                  <span class="metric-title">Lines Analyzed</span>
+                  <span class="metric-icon blue-bg">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="4" y1="6" x2="20" y2="6"/>
+                      <line x1="4" y1="12" x2="20" y2="12"/>
+                      <line x1="4" y1="18" x2="20" y2="18"/>
+                    </svg>
+                  </span>
+                </div>
+                <div class="metric-value" id="log-stat-lines">0</div>
+                <div class="metric-footer">
+                  <span class="metric-subtext">Total log entries processed</span>
+                </div>
+              </div>
+
+              <div class="metric-card">
+                <div class="metric-header">
+                  <span class="metric-title">Failed Logins</span>
+                  <span class="metric-icon amber-bg">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                      <line x1="12" y1="15" x2="12" y2="17"/>
+                    </svg>
+                  </span>
+                </div>
+                <div class="metric-value text-amber" id="log-stat-failed">0</div>
+                <div class="metric-footer">
+                  <span class="metric-subtext">Invalid credentials or user</span>
+                </div>
+              </div>
+
+              <div class="metric-card">
+                <div class="metric-header">
+                  <span class="metric-title">Suspicious Offending IPs</span>
+                  <span class="metric-icon red-bg">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="15" y1="9" x2="9" y2="15"/>
+                      <line x1="9" y1="9" x2="15" y2="15"/>
+                    </svg>
+                  </span>
+                </div>
+                <div class="metric-value text-red" id="log-stat-ips">0</div>
+                <div class="metric-footer">
+                  <span class="metric-subtext">IPs with repeated failures</span>
+                </div>
+              </div>
+
+              <div class="metric-card">
+                <div class="metric-header">
+                  <span class="metric-title">Threat Assessment</span>
+                  <span class="metric-icon teal-bg">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                  </span>
+                </div>
+                <div class="metric-value" id="log-stat-threat">Elevated</div>
+                <div class="metric-footer">
+                  <span class="metric-subtext" id="log-stat-threat-desc">Brute-force activity found</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid-2-col mb-4">
+              <!-- Top Offending IPs Table -->
+              <div class="panel">
+                <div class="panel-header">
+                  <h3 class="panel-title">Top Source IP Addresses (By Failure Count)</h3>
+                  <span class="panel-subtitle">Potential automated botnets or attackers</span>
+                </div>
+                <div class="panel-body p-0">
+                  <div class="table-responsive">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th>Source IP</th>
+                          <th>Failures</th>
+                          <th>Threat Level</th>
+                          <th>Action Suggested</th>
+                        </tr>
+                      </thead>
+                      <tbody id="log-ip-table-body">
+                        <!-- Populated by JS -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Attack Vectors & Insight -->
+              <div class="panel">
+                <div class="panel-header">
+                  <h3 class="panel-title">Incident Analysis &amp; Mitigation</h3>
+                  <span class="panel-subtitle">SOC Analyst Summary</span>
+                </div>
+                <div class="panel-body">
+                  <div class="incident-card" id="log-incident-summary">
+                    <!-- Populated by JS -->
+                  </div>
+
+                  <div class="mitigation-steps mt-3">
+                    <h4 class="mini-heading">Recommended Server Countermeasures:</h4>
+                    <ul class="clean-bullet-list">
+                      <li><strong>Deploy Fail2ban / CrowdSec:</strong> Automatically ban IPs that fail authentication 3+ times in a 10-minute window.</li>
+                      <li><strong>Disable SSH Password Authentication:</strong> Enforce SSH Key pairs (Ed25519) and disallow root SSH logins.</li>
+                      <li><strong>Change Default Ports:</strong> Relocating SSH off port 22 reduces noise from dumb automated internet bots.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Matching Log Lines Viewer -->
+            <div class="panel">
+              <div class="panel-header">
+                <div class="panel-title-wrap">
+                  <h3 class="panel-title">Flagged Incident Log Lines</h3>
+                  <span class="panel-subtitle">Filtered raw syslog lines triggering security alerts</span>
+                </div>
+                <div class="log-filter-box">
+                  <input type="text" id="log-search-filter" class="form-control form-control-sm" placeholder="Filter lines by keyword or IP...">
+                </div>
+              </div>
+              <div class="panel-body p-0">
+                <div class="log-terminal" id="log-terminal-output">
+                  <!-- Terminal lines populated by JS -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Empty State (When no log file loaded) -->
+          <div id="log-empty-state" class="panel">
+            <div class="panel-body text-center py-5">
+              <div class="empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <line x1="4" y1="6" x2="20" y2="6"/>
+                  <line x1="4" y1="12" x2="14" y2="12"/>
+                  <line x1="4" y1="18" x2="18" y2="18"/>
+                  <circle cx="18" cy="12" r="2"/>
+                </svg>
+                <h4>No Log Data Loaded</h4>
+                <p>Click "Load Sample Linux Auth Log" to test the parser with sample data, or select any local <code>.log</code> / <code>.txt</code> file.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW 6: REPORTS & HISTORY                      -->
+        <!-- ============================================== -->
+        <section class="view-section" id="view-reports">
+          <div class="tool-header-block">
+            <div class="tool-title-group">
+              <h1 class="tool-main-title">Reports, History &amp; Data Export</h1>
+              <p class="tool-subtitle">
+                Review all security evaluations performed in this workstation session and export structured reports.
+              </p>
+            </div>
+            <div class="header-action-group">
+              <button class="btn btn-outline" id="btn-export-csv">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Export CSV
+              </button>
+              <button class="btn btn-outline" id="btn-export-json">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Export JSON
+              </button>
+              <button class="btn btn-danger-outline" id="btn-clear-history">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3 6 5 6 21 6"/>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                </svg>
+                Clear History
+              </button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title-wrap">
+                <h3 class="panel-title">Inspection Audit History</h3>
+                <span class="panel-subtitle">Stored locally in your browser's private local storage</span>
+              </div>
+              
+              <!-- Filter Controls -->
+              <div class="table-filters">
+                <select id="filter-module" class="form-select form-select-sm" aria-label="Filter history by security module">
+                  <option value="all">All Modules</option>
+                  <option value="Password Checker">Password Checker</option>
+                  <option value="URL Analyzer">URL Analyzer</option>
+                  <option value="File Integrity">File Integrity</option>
+                  <option value="Log Analyzer">Log Analyzer</option>
+                </select>
+                <input type="text" id="filter-search" class="form-control form-control-sm" placeholder="Search entries...">
+              </div>
+            </div>
+
+            <div class="panel-body p-0">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 170px;">Timestamp</th>
+                      <th style="width: 150px;">Module</th>
+                      <th style="width: 130px;">Verdict</th>
+                      <th>Finding Details</th>
+                      <th style="width: 100px;">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="full-history-table-body">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW 7: LEARN SECURITY                         -->
+        <!-- ============================================== -->
+        <section class="view-section" id="view-learn">
+          <div class="tool-header-block">
+            <div class="tool-title-group">
+              <h1 class="tool-main-title">Cybersecurity Knowledge &amp; Presentation Reference</h1>
+              <p class="tool-subtitle">
+                Clear, beginner-friendly explanations of core cybersecurity principles, algorithms, and defensive practices to assist your college presentation.
+              </p>
+            </div>
+          </div>
+
+          <div class="edu-grid">
+            
+            <!-- Card 1: CIA Triad -->
+            <div class="edu-topic-card">
+              <div class="topic-header">
+                <span class="topic-num">01</span>
+                <h3 class="topic-title">The CIA Triad</h3>
+              </div>
+              <div class="topic-body">
+                <p>The foundational model of information security for policies and architectures:</p>
+                <div class="triad-grid">
+                  <div class="triad-item">
+                    <strong>Confidentiality</strong>
+                    <span>Ensuring sensitive data is inaccessible to unauthorized parties (e.g. Encryption, Access Controls).</span>
+                  </div>
+                  <div class="triad-item">
+                    <strong>Integrity</strong>
+                    <span>Guarantees data is authentic, accurate, and protected from modification (e.g. SHA-256 Hashes).</span>
+                  </div>
+                  <div class="triad-item">
+                    <strong>Availability</strong>
+                    <span>Assures authorized users have uninterrupted access to systems (e.g. DDoS defense, Redundancy).</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Hashing vs Encryption vs Encoding -->
+            <div class="edu-topic-card">
+              <div class="topic-header">
+                <span class="topic-num">02</span>
+                <h3 class="topic-title">Hashing vs. Encryption vs. Encoding</h3>
+              </div>
+              <div class="topic-body">
+                <p>A classic exam &amp; interview question that confuses many students:</p>
+                <div class="table-responsive mt-2">
+                  <table class="data-table table-compact">
+                    <thead>
+                      <tr>
+                        <th>Concept</th>
+                        <th>Reversible?</th>
+                        <th>Key Required?</th>
+                        <th>Primary Purpose</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>Hashing</strong> (SHA-256)</td>
+                        <td><span class="badge badge-danger">No (One-Way)</span></td>
+                        <td>No</td>
+                        <td>Integrity &amp; tamper verification</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Encryption</strong> (AES/RSA)</td>
+                        <td><span class="badge badge-success">Yes (Two-Way)</span></td>
+                        <td>Yes (Key)</td>
+                        <td>Confidentiality of secrets</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Encoding</strong> (Base64)</td>
+                        <td><span class="badge badge-success">Yes (Two-Way)</span></td>
+                        <td>No</td>
+                        <td>Data format interoperability</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: Anatomy of a Phishing URL -->
+            <div class="edu-topic-card">
+              <div class="topic-header">
+                <span class="topic-num">03</span>
+                <h3 class="topic-title">Anatomy of a Phishing URL</h3>
+              </div>
+              <div class="topic-body">
+                <p>How threat actors deceive victims by manipulating domain hierarchies:</p>
+                <div class="phish-diagram font-mono">
+                  <span class="p-scheme">https://</span><span class="p-subdomain">paypal.com.account-update.</span><span class="p-domain">evil-portal.xyz</span><span class="p-path">/login</span>
+                </div>
+                <div class="phish-legend">
+                  <div><span class="dot dot-green"></span> <strong>Scheme:</strong> Valid SSL certificate simply means encrypted transport, not that the owner is legitimate!</div>
+                  <div><span class="dot dot-amber"></span> <strong>Subdomain:</strong> Attackers put real brand names here to trick users reading left-to-right.</div>
+                  <div><span class="dot dot-red"></span> <strong>Registered Domain:</strong> This is the REAL destination server (<code>evil-portal.xyz</code>) where stolen data lands.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 4: Defense in Depth -->
+            <div class="edu-topic-card">
+              <div class="topic-header">
+                <span class="topic-num">04</span>
+                <h3 class="topic-title">Defense in Depth (Layered Defense)</h3>
+              </div>
+              <div class="topic-body">
+                <p>Security should never depend on a single lock. If one barrier is penetrated, other layers prevent catastrophic failure:</p>
+                <ul class="clean-bullet-list">
+                  <li><strong>Layer 1 - Perimeter:</strong> Firewalls, Cloudflare DDoS shielding, Port management.</li>
+                  <li><strong>Layer 2 - Network &amp; Host:</strong> Segmentation, IDS/IPS, OS hardening, log monitoring.</li>
+                  <li><strong>Layer 3 - Application:</strong> Input validation, rate limiting, secure password hashing (Argon2).</li>
+                  <li><strong>Layer 4 - Data &amp; User:</strong> Multi-factor authentication (MFA/2FA), encryption at rest, security awareness.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Card 5: Password Entropy & Brute Force Mathematics -->
+            <div class="edu-topic-card">
+              <div class="topic-header">
+                <span class="topic-num">05</span>
+                <h3 class="topic-title">Password Entropy &amp; The Mathematics of Cracking</h3>
+              </div>
+              <div class="topic-body">
+                <p>Information entropy quantifies unpredictability in bits:</p>
+                <div class="phish-diagram font-mono" style="color: var(--accent-teal);">
+                  Entropy (bits) = L &times; log<sub>2</sub>(N)
+                </div>
+                <div class="phish-legend">
+                  <div><strong>L:</strong> Password character length (the single most potent variable).</div>
+                  <div><strong>N:</strong> Character pool size (lowercase = 26, alphanumeric = 62, with symbols = 95).</div>
+                  <div><strong>Passphrase Advantage:</strong> A 4-word passphrase chosen from a 7,776-word dictionary yields <strong>~51.7 bits of base entropy</strong> and 20+ characters, defeating GPU dictionary attacks while remaining memorable!</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW 8: SETTINGS                               -->
+        <!-- ============================================== -->
+        <section class="view-section" id="view-settings">
+          <div class="tool-header-block">
+            <div class="tool-title-group">
+              <h1 class="tool-main-title">Toolkit Configuration &amp; Privacy Architecture</h1>
+              <p class="tool-subtitle">
+                Inspect local storage parameters, toggle visual themes, and review the zero-trust privacy boundary.
+              </p>
+            </div>
+          </div>
+
+          <div class="grid-2-col">
+            <!-- Left: Settings Controls -->
+            <div class="panel">
+              <div class="panel-header">
+                <h3 class="panel-title">Workstation Preferences</h3>
+              </div>
+              <div class="panel-body">
+                <div class="setting-item">
+                  <div class="setting-text">
+                    <strong>Visual Interface Theme</strong>
+                    <p class="setting-desc">Switch between SOC Midnight Navy and Enterprise Light Mode.</p>
+                  </div>
+                  <div class="setting-action">
+                    <select id="setting-theme-select" class="form-select form-select-sm" aria-label="Select visual interface theme">
+                      <option value="theme-dark">Midnight Navy (SOC Dark)</option>
+                      <option value="theme-light">Enterprise Light</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-text">
+                    <strong>Local Data Storage</strong>
+                    <p class="setting-desc">History entries stored locally in this browser's <code>localStorage</code>.</p>
+                  </div>
+                  <div class="setting-action">
+                    <span class="badge badge-info" id="setting-history-count">0 items stored</span>
+                  </div>
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-text">
+                    <strong>Reset Workstation Data</strong>
+                    <p class="setting-desc">Wipe all audit history and reset metric counters to zero.</p>
+                  </div>
+                  <div class="setting-action">
+                    <button class="btn btn-danger-outline btn-sm" id="btn-settings-wipe">Reset Data</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Architectural & Privacy Guarantee -->
+            <div class="panel">
+              <div class="panel-header">
+                <h3 class="panel-title">Privacy &amp; Technical Architecture</h3>
+              </div>
+              <div class="panel-body">
+                <div class="privacy-checklist">
+                  <div class="privacy-item">
+                    <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <div>
+                      <strong>No Backend Server Required</strong>
+                      <p>All routines execute purely inside the browser sandbox using standard Web APIs.</p>
+                    </div>
+                  </div>
+
+                  <div class="privacy-item">
+                    <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <div>
+                      <strong>Zero Password Persistence</strong>
+                      <p>Passwords analyzed in the Password Checker are strictly discarded and never written to storage.</p>
+                    </div>
+                  </div>
+
+                  <div class="privacy-item">
+                    <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <div>
+                      <strong>Native Cryptography API</strong>
+                      <p>File hashes are generated using <code>crypto.subtle.digest</code>, an RFC-compliant cryptographic standard built into modern browsers.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Academic Info -->
+                <div class="student-info-box mt-4">
+                  <span class="badge badge-demo">Project Attribution</span>
+                  <p class="student-text mt-2">
+                    <strong>Project Name:</strong> CyberGuard Security Kit<br>
+                    <strong>Architecture:</strong> Vanilla HTML5, Modern CSS Variables, Modular ES6 JavaScript.<br>
+                    <strong>Purpose:</strong> Academic Cybersecurity Demonstration &amp; SOC Simulation.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- Global Application Footer -->
+      <footer class="app-footer">
+        <div class="footer-left">
+          <span>&copy; CyberGuard Security Kit &bull; Enterprise SOC Architecture Simulation</span>
+        </div>
+        <div class="footer-right">
+          <span class="system-healthy-pill">
+            <span class="status-dot"></span> All 4 Local Security Modules Operational
+          </span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal for Clear History -->
+  <div class="modal-backdrop" id="clear-modal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Clear Inspection History</h3>
+        <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete all saved session audit entries? This action cannot be undone.</p>
+        <p class="text-muted"><small>Note: This only affects local browser storage on this device.</small></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
+        <button class="btn btn-danger" id="modal-confirm-btn">Yes, Clear History</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Core Script -->
+  <script src="script.js"></script>
+</body>
+</html>
